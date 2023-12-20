@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://localhost:9000');
+const ws = new WebSocket('wss://shellerstournament-70x3.onrender.com');
 const querys = document.querySelectorAll('.query');
 const queryable = document.querySelectorAll('.queryable');
 const welcomePage = document.querySelector('.welcomePage');
