@@ -120,7 +120,7 @@
             }
         }
             const User_id = '<%=unique_id%>';
-            const ws = new WebSocket('ws://localhost:9000');
+            const ws = new WebSocket('wss://shellerstournament-70x3.onrender.com');
             new startRegistration(ws,User_id,createServerRefPackage)
             document.querySelector('.print').addEventListener('click', e =>{
                 window.print()
