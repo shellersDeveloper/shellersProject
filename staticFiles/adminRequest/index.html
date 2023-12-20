@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Request Page</title>
+    <link rel="stylesheet" href="./reqCss/index.css">
+    <link rel="stylesheet" href="../common.css">
+</head>
+<body>
+        <div class="container">
+            <a href="/"><div class="backbtn icon" style="cursor: pointer;"></div></a>
+            <form action="/adminConfirmation" method="post">
+                <input name="token" placeholder="Enter Admin Token" type="text">
+                <button class="icon three_d_style">submit</button>
+            </form>
+        </div>
+        <script>
+            const back = document.querySelector('.backbtn');
+            back.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M10 21.308L0.692001 12L10 2.69199L11.063 3.75599L2.82 12L11.064 20.244L10 21.308Z" fill="black"/>
+            </svg>`;
+        </script>
+</body>
+</html>

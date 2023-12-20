@@ -1,0 +1,35 @@
+
+.container
+{
+    height: 100%;
+    width: 100%;
+}
+.formPage
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    height: 90%;
+    min-height: 200px;
+    max-height: 500px;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    overflow: scroll;
+    /* background-image: url(../img/shellerMain.png); */
+    background-size: contain;
+}
+form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 35px;
+    padding: 20px 5px;
+    /* background:rgba(248,132,62,.4) ; */
+    border-radius: 15px;
+}

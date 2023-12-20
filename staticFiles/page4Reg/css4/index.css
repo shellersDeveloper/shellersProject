@@ -1,0 +1,370 @@
+.container
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    padding-top: 40px;
+    overflow: scroll;
+    position: relative;
+}
+.formPage
+{
+    height: 100%;
+    min-height: 400px;
+    width: 100%;
+    max-width: 500px;
+    /* background: url(../img/shellerMain.png); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.progressBar
+{
+    height: 40px;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 5px;
+    font-size: 10px;
+    /* background: #fff; */
+}
+.regPage
+{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 8px 15px;
+    padding-bottom: 70px;
+    overflow: scroll;
+    z-index: 200;
+    /* border: 1px solid #000; */
+}
+.regPage1{
+    row-gap: 20px;
+}
+.regPage2{
+    position: relative;
+}
+.toggleBtn
+{
+    padding: 5px 10px;
+    width: fit-content;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    z-index: 999;
+    /* border: 2px solid #000; */
+    border-radius: 20px;
+}
+.player
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 5px;
+    /* background: green; */
+    padding: 10px;
+    padding-left: 20px;
+    width: 100%;
+    position: relative;
+}
+.playerNumber
+{
+    /* padding: 5px; */
+    border-radius: 50%;
+    border:2px solid #000;
+    color: #000;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+.player .playerIcon
+{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: #fff;
+    background-image: url(../img/free.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+input[type = file]
+{
+    display: none;
+}
+.addPlayers
+{
+    height: 30px;
+    width: 30px;
+    transition: all linear .3s;
+    cursor: pointer;
+    display: none;
+}
+.addPlayers:active
+{
+    transform:scale(1.1);
+}
+label
+{
+    height: fit-content;
+    width: 100%;
+}
+.uploadBox
+{
+    height: 300px;
+    width: 100%;
+    border: 2px dashed #000;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: .7;
+    font-weight: 900;
+    text-transform: uppercase;
+    /* background: #fff; */
+}
+.holdUploads
+{
+    width: 100%;
+    min-height: fit-content;
+    position: relative;
+    padding: 5px;
+}
+.upload_confirmation
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.similarUpload
+{
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+}
+.mergedSection
+{
+    /* background: blue; */
+    width: 100%;
+    display: none;
+}
+.player_upload,.merged_upload
+{
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    font-weight: 900;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+.merged_upload::after
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #13c1fb36;
+    cursor: pointer;
+}
+.selective_div
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #13c1fb36;
+    cursor: pointer;
+}
+.player_upload span,.merged_upload span{
+    height: 20px;
+    width: 20px;
+}
+.regPage2 .player input{
+    background-color: transparent;
+}
+.uploadPermit
+{
+    display: flex;
+    column-gap: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+.uploadPermit p
+{
+    cursor: pointer;
+}
+.uploadPermit .uploadCheck
+{
+    cursor: pointer;
+    display: block;
+}
+p{
+    text-transform: capitalize;
+    text-align: center;
+    /* font-weight: 700; */
+}
+.regPage3
+{
+    row-gap: 30px;
+}
+.regPage3 label
+{
+    width: fit-content;
+}
+.bankDetails
+{
+    /* background: green; */
+    width: 100%;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border: 2px solid #000;
+}
+.bankDetails .contents
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.bankDetails .contents div hr
+{
+    height: 2px;
+    width: 100%;
+    background: #000;
+}
+.bankDetails .contents div
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+.bankDetails .contents div span{
+    min-width: 130px;
+    text-transform: capitalize;
+}
+.bankDetails .contents div p{
+    min-width: 150px;
+    text-transform: uppercase;
+}
+.bankDetails .contents div p,.bankDetails .contents div span
+{
+    width: fit-content;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+.uploadReciept
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+    row-gap: 10px;
+}
+.uploadReciept .uploadLabel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+}
+.uploadReciept .uploadLabel label{
+    width: 100%;
+}
+.uploadRecSec
+{
+    height: 200px;
+    width: 100%;
+    max-width: 300px;
+    border: 2px dashed #000;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.submit
+{
+    /* background: #000; */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    color: #000;
+}
+.submit p{
+    text-transform: uppercase;
+}
+.saveProgress{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    color: #000;
+}
+@media screen and (max-width:400px){
+    .bankDetails .contents div p
+    {
+        font-size: 19px;
+    }
+}
+@media print {
+    .regPage{
+        overflow: visible !important;
+    }
+}

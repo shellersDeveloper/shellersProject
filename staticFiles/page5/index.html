@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign up</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./css5/index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- <input type="color" name="" id=""> -->
+            <a href="/"><div class="backbtn" style="cursor: pointer; z-index: 999;"></div></a>
+            <div class="formPage three_d_style pageStyling">
+                <form class="" action="/userSignUpData" method="post">
+                    <h2>sign up</h2>
+                    <div class="text box">
+                        <span>full name: </span>
+                        <input name="fullName" type="text" required>
+                    </div>
+                    <div class="number box">
+                        <span>phone number: </span>
+                        <input name="phoneNumber" type="number" required>
+                    </div>
+                    <div class="email box">
+                        <span>email: </span>
+                        <input name="email" class="emailInput" type="email" required>
+                    </div>
+                    <div class="password box">
+                        <span>create password: </span>
+                        <input name="pass1" type="password" class="passwordInput" required>
+                        <div class="eye icon"></div>
+                    </div>
+                    <div class="password box">
+                        <span>confirm password: </span>
+                        <input name="pass2" type="password" class="passwordConfirmIpnut" required>
+                        <div class="eye_2 icon"></div>
+                    </div>
+                    <button disabled class="button three_d_style" style="cursor:not-allowed;">sign up</button>
+                    <!-- <div class="horizontal"><hr>or<hr></div>
+                    <button class="button three_d_style">login in with facebook</button> -->
+                </form>
+            </div>
+        </div>
+    <div class="logo"></div>
+        <script src="./index5.js"></script>
+        <script>
+            const ws = new WebSocket('ws://localhost:9000');
+            let unified = true
+            let popElem = null;
+            let generatedKeys = {}
+            ws.addEventListener('open', e =>{
+            class createServerPackage{
+                constructor(name,text)
+                {
+                    this.Object = {
+                        title:'signUpAuth',
+                        content:{
+                            'name':name,
+                            'text':text
+                        }
+                    }
+                }
+            }
+            const gen_bool = false;
+            const inputElements = document.querySelectorAll('input');
+            const button = document.querySelector('.button');
+            const form = document.querySelector('form');
+            const mainPassword = document.querySelector('.passwordInput')
+            let summation
+
+            inputElements.forEach((val,idx) =>{
+                    val.addEventListener('input', e =>{
+                    switch(true)
+                    {
+                        case val.className === 'emailInput' || val.className === 'passwordInput':
+                            const packager = new createServerPackage(val.getAttribute('name'),val.value)
+                            ws.send(JSON.stringify(packager.Object))
+                        break;
+                        case val.className === 'passwordConfirmIpnut':
+                        switch(true)
+                        {
+                            case mainPassword.value === '':
+                                val.value = '';
+                                generatedKeys['Pp'] = false
+                                popElem.element.innerHTML = 'verify password confirmation'
+                            break;
+                            default:
+                                switch(true)
+                                {
+                                    case mainPassword.value === val.value:
+                                        generatedKeys['Pp'] = true 
+                                    break;
+                                    default:
+                                        generatedKeys['Pp'] = false;
+                                        popElem.element.innerHTML = 'verify password confirmation'
+                                }
+                        }
+                    }
+                    checkContents(val,idx)
+                })
+            })
+
+            ws.addEventListener('message', ({data}) =>{
+                const processedData = JSON.parse(data).object;
+                switch(true)
+                {
+                    case processedData.title === "websocketAuth" && processedData.content.data:
+                        // button.disabled = true;
+                        // button.style.cursor = 'not-allowed';
+                        switch(true)
+                        {
+                            case processedData.content.category === 'email':
+                                popElem.element.innerHTML = 'email not avilable'
+                                styleInputs(processedData.content.category)
+                                generatedKeys['e'] = false
+                            break;
+                            case processedData.content.category === 'pass1':
+                                popElem.element.innerHTML = 'password not avilable'
+                                styleInputs(processedData.content.category);
+                                generatedKeys['p'] = false
+                        }
+                    break;
+                    case processedData.title === "websocketAuth" && !processedData.content.data:
+                        button.disabled = false;
+                        button.style.cursor = 'pointer';
+        
+                        switch(true)
+                        {
+                            case processedData.content.category === 'email':
+                                RemovestyleInputs(processedData.content.category);
+                                generatedKeys['e'] = true;
+                                popElem.element.innerHTML = 'email available'
+                            break;
+                            case processedData.content.category === 'pass1':
+                                RemovestyleInputs(processedData.content.category)
+                                generatedKeys['p'] = true;
+                                popElem.element.innerHTML = 'password available'
+                        }
+                }
+                summation = Object.keys(generatedKeys).every(val =>{return generatedKeys[val] === true});
+                stBtn();
+            })
+
+            function styleInputs(name)
+            {
+                document.querySelectorAll('input').forEach(val =>{
+                    switch(true)
+                    {
+                        case val.getAttribute('name') === name:
+                            val.style.border = '1px solid rgb(180, 4, 4,.6)'
+                    }
+                })
+            }
+
+            function RemovestyleInputs(name)
+            {
+                document.querySelectorAll('input').forEach(val =>{
+                    switch(true)
+                    {
+                        case val.getAttribute('name') === name:
+                            val.style.border = '1px solid #000'
+                    }
+                })
+            }
+
+            function checkContents(val,idx)
+            {
+                switch(true)
+                {
+                    case val.value !== '':
+                        generatedKeys[`${idx}`] = true;
+                    break;
+                    default:
+                        generatedKeys[`${idx}`] = false;
+                        popElem.element.innerHTML = 'ensure to fill all input'
+                }
+                summation = Object.keys(generatedKeys).every(val =>{return generatedKeys[val] === true});
+                stBtn()
+            }
+            function stBtn()
+            {
+                switch(true)
+                {
+                    case summation:
+                        button.disabled = false;
+                        button.style.cursor = 'pointer';
+                        popElem.toggleReverse()
+                    break;
+                    default:
+                        button.disabled = true;
+                        button.style.cursor = 'not-allowed';
+                        popElem.toggle()
+                }
+            }
+            })
+        </script>
+        <script type="module">
+            import popUp from '../popUp.js';
+            import keys from '../key.js';
+            popElem = new popUp(document.querySelector('.formPage'));
+            generatedKeys = new keys(document.querySelectorAll('input').length,true).genkeys;
+        </script>
+</body>
+</html>

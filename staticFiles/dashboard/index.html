@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./css_dash/index.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/"><div class="backbtn"></div></a>
+    <h2>registered players dashboard</h2>
+    </div>
+    <script>
+        const ws = new WebSocket('ws://localhost:9000');
+        const backbtn = document.querySelector('.backbtn')
+        backbtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M10 21.308L0.692001 12L10 2.69199L11.063 3.75599L2.82 12L11.064 20.244L10 21.308Z" fill="black"/>
+        </svg>`;
+        let fetchPop;
+        ws.addEventListener('open',e =>{
+            ws.send(JSON.stringify({title:'dashboard'}));
+
+            ws.addEventListener('message', ({data}) =>{
+
+                fetchPop.element.style.opacity = 0;
+                        let timeout = setTimeout(() => {
+                            fetchPop.pop()
+                            clearTimeout(timeout)
+                        }, 2000);
+
+                let refined = JSON.parse(data);
+                let headData = ['player name','player number','player role']
+                function createTable(data)
+                {
+                    for(let i = 0; i < Object.keys(data).length; i++)
+                    {
+                        let tableDiv = document.createElement('div');
+                        tableDiv.classList.add('table')
+                        document.querySelector('.container').appendChild(tableDiv)
+                        let table = document.createElement('table');
+                        let nameCont = document.createElement('h2');
+                        nameCont.textContent = `Organisation Name :${data[`${Object.keys(data)[i]}`].name}`
+                        tableDiv.appendChild(nameCont);
+                        let teamCont = document.createElement('h2');
+                        teamCont.textContent = `Team Name :${data[`${Object.keys(data)[i]}`].ProposedTeamName}`
+                        tableDiv.appendChild(teamCont);
+                        console.log(data[`${Object.keys(data)[i]}`])
+                        tableDiv.appendChild(table)
+                        let playermodule = data[`${Object.keys(data)[i]}`].player.data;
+                        createSmall(headData,table,true)
+                        for(let k = 0;k < Object.keys(playermodule).length; k++)
+                        {
+                            createSmall([playermodule[`${Object.keys(playermodule)[k]}`]['playerName'],playermodule[`${Object.keys(playermodule)[k]}`]['playerNumber'],playermodule[`${Object.keys(playermodule)[k]}`]['playerRole']],table,false)  
+                        }
+                    }
+                    function createSmall(array,parent,bool)
+                    {
+                        const tr = document.createElement('tr')
+                        for(let j = 0; j < 3; j++)
+                        {
+                            let tdata;
+                            switch(true)
+                            {
+                                case bool:
+                                    tdata = document.createElement('th');
+                                break;
+                                default:
+                                    tdata = document.createElement('td')
+                            }
+                            tdata.textContent = array[j]
+                            tr.appendChild(tdata)
+                        } 
+                        parent.appendChild(tr)
+                    }
+                }
+                createTable(refined.object.content.data)
+            })
+        }) 
+    </script>
+    <script type="module">
+        import fetch from '../fetchNotification.js';
+        fetchPop = new fetch()
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./css3/index.css">
+    <link rel="stylesheet" href="./css3/index002.css">
+</head>
+<body>
+    <div class="container">
+    <!-- <input type="color" name="" id=""> -->
+        <a href="/"><div class="backbtn" style="cursor: pointer;"></div></a>
+        <div class="formPage">
+            <form class="" action="/verifyAccount" method="post">
+                <h2>login to account</h2>
+                <div class="email box">
+                    <span>email: </span>
+                    <input name="email" type="email" required>
+                </div>
+                <div class="password box">
+                    <span>password: </span>
+                    <input name="pass1" type="password" class="passwordInput" required>
+                    <div class="eye icon"></div>
+                </div>
+                <button class="button three_d_style">login</button>
+                <!-- <div class="horizontal"><hr>or<hr></div>
+                <button class="button three_d_style">login in with facebook</button> -->
+            </form>
+        </div>
+    </div>
+    <script src="./index3.js"></script>
+    <script type="module">
+        import popUp from '../popUp.js';
+        import keys from '../key.js';
+        popElem = new popUp(document.querySelector('.formPage'));
+        generatedKeys = new keys(document.querySelectorAll('input').length,false).genkeys;
+        let summation = false;
+        const button = document.querySelector('.button')
+
+        const inputElements = document.querySelectorAll('input');
+        inputElements.forEach((val,idx) =>{
+            val.addEventListener('input', e =>{
+                switch(true)
+                {
+                    case val.value !== '':
+                        generatedKeys[`${idx}`] = true;
+                    break;
+                    default:
+                        generatedKeys[`${idx}`] = false;
+                        popElem.element.innerHTML = 'ensure to fill all input'
+                }
+                summation = Object.keys(generatedKeys).every(val =>{return generatedKeys[val] === true});
+                regulateLogin()
+            })
+        })
+
+        function regulateLogin()
+        {
+            switch(true)
+                {
+                    case summation:
+                        button.disabled = false;
+                        button.style.cursor = 'pointer';
+                        popElem.toggleReverse()
+                    break;
+                    default:
+                        button.disabled = true;
+                        button.style.cursor = 'not-allowed';
+                        popElem.toggle()
+                }
+        }
+    </script>
+</body>
+</html>

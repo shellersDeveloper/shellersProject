@@ -1,0 +1,155 @@
+.menuContainer
+{
+    height: 29px;
+    width: 30px;
+}
+.iconContainer
+{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.searchIcon
+{
+    height: 20px;
+    width: 22px;
+    cursor: pointer;
+}
+.searchBar input{
+    height: 18px;
+    width: 200px;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    border-bottom: 1px solid #000;
+    padding: 0 10px;
+    font-size: 17px;
+}
+.searchBar input::placeholder
+{
+    text-transform: capitalize;
+    color: #ffffff62;
+}
+.shellerMainImage
+{
+    min-height: 248px;
+    min-width: 235px;
+    background-image:url(../../img/shellerMain.png);
+    background-size: contain;
+}
+.slide
+{
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform .2s linear;
+}
+.exitIcon
+{
+    position: absolute;
+    right: 16px;
+    top: 10px;
+}
+.toggleSideBar ul
+{
+    color: #fff;
+    font-weight: 700;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-left: 16px;
+}
+.toggleSideBar ul li
+{
+    cursor: pointer;
+    font-size: 16px;
+}
+.footerChild
+{
+    width: 30%;
+    max-width: 300px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+    row-gap: 20px;
+    /* background: green; */
+}
+.footerChild .top
+{
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 10px 5px;
+}
+.footerChild .text
+{
+    height: fit-content;
+    width: 100%;
+    text-align: center;
+    /* font-size: 13px; */
+}
+.footerChild .text span{
+    margin-right: 10px;
+}
+.pre
+{
+    width: 100%;
+    height:fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    row-gap: 10px;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 50px 10px;
+    background-color: rgba(44, 18, 18, 0.8);
+    z-index: 100;
+}
+.alt
+{
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    align-items: center;
+    text-transform: capitalize;
+    color: #fff;
+    font-weight: 700;
+}
+@media screen and (max-width:600px){
+    .slide{
+        height: 100px;
+        width: 100px;
+    }
+    .slidingImageContainer .content
+    {
+        padding:10px 5px;
+    }
+    .slidingImageContainer
+    {
+        width: 90%;
+    }
+}
+@media screen and (max-width:350px){
+    .slide{
+        height: 200px;
+        width: 100%;
+    }
+    .slidingImageContainer .content
+    {
+        padding:10px 10px;
+    }
+}
+/*3d style*/

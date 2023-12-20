@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./css4/index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- <p></p> -->
+        <a href="/"><div class="backbtn" style="cursor: pointer;"></div></a>
+        <div class="progressBar"></div>
+        <div class="formPage">
+            <div class="regPage1 pageStyling regPage">
+                <h2>Organisation registration</h2>
+                <p>Fill in your organisation's input</p>
+                <div class="orgName box ">
+                    <span>Organisation Name </span>
+                    <input type="text" required>
+                </div>
+                <div class="orgName box ">
+                    <span>Proposed Team Name </span>
+                    <input type="text" required>
+                </div>
+                <div class="orgName box ">
+                    <span>proposed Jersey colour </span>
+                    <input type="text" required>
+                </div>
+                <!-- <div title="(at least, 7 players)" class="orgName box three_d_style">
+                    <span>Team player list</span>
+                    <input type="text" required>
+                </div> -->
+                <div class="orgName box ">
+                    <span>Team Coach </span>
+                    <input type="text" required>
+                </div>
+                <div class="orgName box">
+                    <span>Organisation Email</span>
+                    <input type="text" required>
+                </div>
+            </div>
+            <div class="regPage2 pageStyling regPage">
+                <h2>players registration</h2>
+                <p>register your players.</p>
+                <p>click the add button below to add more players</p>
+            </div>
+            <div class="regPage3 pageStyling regPage">
+                <h2>upload section</h2>
+                <p>upload players staff IDs in merged or single format</p>
+                <p>it is encouraged to upload a merged Id to conserve space</p>
+                <label for="upload_page"><div class="uploadBox"></div></label>
+                <input type="file" id="upload_page">
+                <div class="uploadPermit">
+                    <label for="checkMerge"><p>check box to upload a merged id instead</p></label>
+                    <input type="checkbox" class="uploadCheck" id="checkMerge">
+                </div>
+                <div class="holdUploads">
+                    <div class="upload_confirmation similarUpload">
+                        <!-- <div class="player_upload">
+                            <p>player 1</p>
+                            <span class="checked"></span>
+                        </div> -->
+                    </div>
+                    <div class="mergedSection similarUpload">
+                        <div class="merged_upload">
+                            <p>merged player ID</p>
+                            <span class="checked"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="regPage4 pageStyling regPage">
+                <h2>payment section</h2>
+                <p>make payments by transfer, and upload a copy of the reciept</p>
+                <div class="bankDetails">
+                    <h2>bank details</h2>
+                    <div class="contents">
+                        <div><span>bank Name</span><p>this is the bank name fg fdgfd gfdg fdg fdg </p></div>
+                        <div><span>account Name</span><p>this is the account name</p></div>
+                        <div><span>account number</span><p>this is the account number</p></div>
+                    </div>
+                </div>
+                <div class="uploadReciept">
+                    <h2>upload Reciept</h2>
+                    <input type="file" id="recieptUpload">
+                    <div class="uploadLabel">
+                        <label for="recieptUpload"><div class="uploadRecSec"></div></label>
+                    </div>
+                    <p>please ensure to print each page of your registration, after submitting by clicking the print icon below on each page</p>
+                    <li><p>scroll and print your registration form for scrollable sections to ensure every info is printed</p></li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toggleBtn pageStyling three_d_style">
+        <div class="leftIcon icon"></div>
+        <div class="rightIcon icon"></div>
+        <div class="addPlayers"></div>
+        <div class="saveProgress icon"></div>
+        <div class="submit three_d_style icon">
+            <p>submit</p>
+        </div>
+        <div class="print icon"></div>
+    </div>
+    <div class="logo"></div>
+    <script src="index4.js"></script>
+    <script>
+        // try{
+            class createServerRefPackage{
+            constructor(object,id,purpose,waitState,mergedState){
+                this.title = 'RegPagePackage';
+                this.purpose = purpose
+                this.User_id = id
+                this.object = object;
+                this.waitState = waitState;
+                this.mergedState = mergedState
+            }
+        }
+            const User_id = '<%=unique_id%>';
+            const ws = new WebSocket('ws://localhost:9000');
+            new startRegistration(ws,User_id,createServerRefPackage)
+            document.querySelector('.print').addEventListener('click', e =>{
+                window.print()
+            })
+        // }catch(err)
+        // {
+            // console.log('websocket connection failed due to =>')
+        // }
+    </script>
+    <script type="module">
+        import popUp from '../popUp.js';
+        import keys from '../key.js';
+        import fetch from '../fetchNotification.js'
+        const generatedKeys = new keys(4,false).genkeys;
+        popElem = new popUp(document.querySelector('.formPage'));
+        fetchPop = new fetch()
+        document.querySelector('.submit').addEventListener('click', e =>{
+            validateKeys()
+            let boolean = Object.keys(generatedKeys).every(val =>{return generatedKeys[`${val}`] === true})
+            switch(true)
+            {
+                case boolean:
+                let storagePackage = createServerPackages()
+                const dataExtracted = extractData(storagePackage)
+                let dataPack = dataExtracted[0];
+                let binaryStaffPack = dataExtracted[1];
+                let binaryRecieptPack = dataExtracted[2];
+                const mergedState = dataExtracted[3];
+                let serverPackage = JSON.stringify(new createServerRefPackage(dataPack,User_id,'saveData_register',true,mergedState));
+                
+                ws.send(serverPackage)
+                ws.send(JSON.stringify({data:binaryStaffPack,state:'staff'}));
+                ws.send(JSON.stringify({staffFinished:true}));
+                ws.send(JSON.stringify({data:binaryRecieptPack,state:'re'}));
+                ws.send(JSON.stringify({recieptFinished:true}))
+                // ws.send(JSON.stringify(new createServerRefPackage(dataPack,User_id,'')));
+                break;
+                default:
+                    
+                    let faultySection = [];
+                    let text = ''
+                    Object.keys(generatedKeys).forEach((val,idx) =>{
+                        switch(true)
+                        {
+                            case generatedKeys[`${val}`] === false:
+                                switch(true)
+                                {
+                                    case idx === 1:
+                                    text += `registration page${idx+1}: is not complete \r\n seems you didn\'t select a minimum of 7 players \r\n or, you didn't fill all the parameters \r\n`;
+                                    break;
+                                    case idx === 2:
+                                        text += `\r\n registration page${idx+1}: seems you didn\'t upload all the required ids for your staffs \r\n`;
+                                    break;
+                                    default:
+                                        text += `registration page${idx+1}: is not complete \r\n`
+                                }
+                        }
+                    })
+                    popElem.element.textContent = text
+                    popElem.toggle()
+                    
+            }
+        })
+
+        function validateKeys()
+        {
+            const regPages = document.querySelectorAll('.regPage')
+            for(let i = 0; i < Object.keys(generatedKeys).length; i++)
+            {
+                switch(true)
+                {
+                    case i === 0:
+                        let input = regPages[i].querySelectorAll('input');
+                        generatedKeys[`${i}`] = Array.from(input).every(val =>{return val.value !== ''});
+                    break;
+                    case i === 1:
+                        let bool = [false,false];
+                        let player = regPages[i].querySelectorAll('.player');
+                        switch(true)
+                        {
+                            case player.length < 7:
+                                bool[0] = false;
+                            break;
+                            case player.length >= 7:
+                                bool[0] = true
+                        }
+                        let inputs2 = regPages[i].querySelectorAll('input'); 
+                        bool[1] = Array.from(inputs2).every(val =>{return val.value !== ''});
+                        generatedKeys[`${i}`] = bool.every(val =>{return val === true});
+                    break
+                    case i === 2:
+                        switch(true)
+                        {
+                            case changedBool:
+                            generatedKeys[`${i}`] = document.querySelector('.merged_upload span').innerHTML === svgCheck
+                            break;
+                            default:
+                            let player_uploads = regPages[i].querySelectorAll('.player_upload');
+                            generatedKeys[`${i}`] = Array.from(player_uploads).every(val =>{return val.querySelector('span').innerHTML === svgCheck});
+                        }
+                        console.log(changedBool)
+                    break;
+                    case i === 3:
+                        console.log(recieptUploadData.data)
+                    generatedKeys[`${i}`] = recieptUploadData.data.length !== 0
+                }
+            }
+        }
+    </script>
+</body>
+</html>

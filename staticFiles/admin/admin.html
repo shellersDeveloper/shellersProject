@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin Page</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="./cssAdmin/admin.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/"><div class="backbtn icon" style="cursor: pointer;"></div></a>
+        <div class="header three_d_style">
+            <h2>admin page</h2>
+        </div>
+        <div class="controlPanel">
+            <div class="nav three_d_style">
+                <div class="containNav">
+                    <div class="query1 icon query">
+                        verify payment
+                    </div>
+                    <div class="query1 icon query">
+                        download uploads
+                    </div>
+                    <div class="query1 icon query">
+                        request users login details
+                    </div>
+                </div>
+                
+            </div>
+            <div class="display three_d_style">
+                <div class="welcomePage pages">
+                    <h2>welcome admin</h2>
+                    <p>navigate the options on panel at the left, to query and edit client data</p>
+                </div>
+                <div class="page1 queryable pages">
+                    <div class="float">
+                        <img src="" height="30px" width="30px" alt="">
+                    </div>
+                </div>
+                <div class="page2 queryable pages">this is page 2</div>
+                <div class="page3 queryable pages">
+                    loading your data
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+    <script type="module" >
+        import fetch from '../fetchNotification.js';
+        fetchPop = fetch
+    </script>
+</body>
+</html>
